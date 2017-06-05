@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './navbar.component';
 import { HomeComponent } from './home.component';
 import { UsersComponent } from './users.component';
+import { AddUserComponent } from './add-user.component';
 import { PostsComponent } from './posts.component';
 
 import { UsersService } from './users.service';
@@ -15,6 +16,7 @@ import { UsersService } from './users.service';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users', component: UsersComponent },
+  { path: 'users/new', component: AddUserComponent },
   { path: 'posts', component: PostsComponent},
   { path: '**', redirectTo: ''}
 ];
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
     NavBarComponent,
     HomeComponent,
     UsersComponent,
+    AddUserComponent,
     PostsComponent
   ],
   imports: [
