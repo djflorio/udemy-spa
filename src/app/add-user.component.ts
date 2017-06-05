@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,7 @@ export class AddUserComponent {
     constructor(@Inject(FormBuilder) fb: FormBuilder) {
         this.form = fb.group({
             user: fb.group({
-                name: [],
+                name: ['', Validators.required],
                 email: [],
                 phone: []
             }),
