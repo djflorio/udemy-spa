@@ -12,11 +12,16 @@ import { AddUserComponent } from './add-user.component';
 import { PostsComponent } from './posts.component';
 
 import { UsersService } from './users.service';
+import { PreventUnsavedChangesGuard } from './prevent-unsaved-changes-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users', component: UsersComponent },
-  { path: 'users/new', component: AddUserComponent },
+  {
+    path: 'users/new',
+    component: AddUserComponent,
+    canDeactivate: [ PreventUnsavedChangesGuard ]
+  },
   { path: 'posts', component: PostsComponent},
   { path: '**', redirectTo: ''}
 ];
@@ -37,7 +42,10 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [UsersService],
+  providers: [
+    UsersService,
+    PreventUnsavedChangesGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

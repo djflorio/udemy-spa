@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailValidators } from './email-validators';
+import { FormComponent } from './form-component';
 
 @Component({
     templateUrl: './add-user.component.html'
 })
-export class AddUserComponent {
+export class AddUserComponent implements OnInit, FormComponent {
     form: FormGroup;
     minNameLength = 4;
     maxNameLength = 20;
