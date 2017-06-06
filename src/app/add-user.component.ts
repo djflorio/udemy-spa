@@ -21,7 +21,7 @@ export class AddUserComponent {
                     Validators.maxLength(this.maxNameLength)
                     ]
                 ],
-                email: ['', [Validators.required, EmailValidators.mustBeValidEmail]],
+                email: ['', EmailValidators.mustBeValidEmail],
                 phone: ['']
             }),
             address: this._fb.group({

@@ -7,6 +7,6 @@ export class EmailValidators {
         if (!re.test(control.value))
             return { mustBeValidEmail: true };
         
-        return { mustBeValidEmail: null };
+        return null;
     }
 }
