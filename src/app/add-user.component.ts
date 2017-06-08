@@ -16,6 +16,10 @@ export class AddUserComponent implements OnInit, FormComponent {
     constructor(private _fb: FormBuilder, private _usersService: UsersService, private _router: Router) { }
 
     ngOnInit() {
+        this.generateForm();
+    }
+
+    generateForm() {
         this.form = this._fb.group({
             name: ['', [
                 Validators.required,

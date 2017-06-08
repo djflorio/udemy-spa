@@ -9,14 +9,21 @@ import { NavBarComponent } from './navbar.component';
 import { HomeComponent } from './home.component';
 import { UsersComponent } from './users.component';
 import { AddUserComponent } from './add-user.component';
-import { PostsComponent } from './posts.component';
+import { PostsComponent } from './posts/posts.component';
+import { SpinnerComponent } from './spinner.component';
 
 import { UsersService } from './users.service';
+import { PostsService } from './posts/posts.service';
 import { PreventUnsavedChangesGuard } from './prevent-unsaved-changes-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users', component: UsersComponent },
+  {
+    path: 'users/:id',
+    component: AddUserComponent,
+    canDeactivate: [ PreventUnsavedChangesGuard ]
+  },
   {
     path: 'users/new',
     component: AddUserComponent,
@@ -33,7 +40,8 @@ const appRoutes: Routes = [
     HomeComponent,
     UsersComponent,
     AddUserComponent,
-    PostsComponent
+    PostsComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +53,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     UsersService,
+    PostsService,
     PreventUnsavedChangesGuard
   ],
   bootstrap: [AppComponent]

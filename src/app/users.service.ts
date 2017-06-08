@@ -16,8 +16,17 @@ export class UsersService {
             .map(res => res.json() as User[]);
     }
 
+    getUser(userId) {
+        return this._http.get(this.getUserUrl(userId))
+			.map(res => res.json());
+    }
+
     addUser(post) : Observable<User> {
         return this._http.post(this.usersUrl, JSON.stringify(post))
             .map(res => res.json());
     }
+
+    private getUserUrl(userId){
+		return this.usersUrl + "/" + userId;
+	}
 }
