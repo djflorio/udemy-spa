@@ -19,7 +19,7 @@ import { PostComment } from './post-comment';
 })
 export class PostsComponent implements OnInit {
     posts: Post[];
-    postsLoading = true;
+    postsLoading : Boolean;
     commentsLoading = true;
     postSelected = false;
     selectedPost = new Post();
@@ -29,14 +29,23 @@ export class PostsComponent implements OnInit {
     constructor(private _postsService: PostsService, private _usersService: UsersService) {}
 
     ngOnInit() {
-        this._postsService.getPosts()
+        this.loadUsers();
+        this.loadPosts();
+    }
+
+    loadUsers() {
+        this._usersService.getUsers()
+            .subscribe(users =>
+                this.users = users);
+    }
+
+    loadPosts(filter?) {
+        this.postsLoading = true;
+        this._postsService.getPosts(filter)
             .subscribe(posts => {
                 this.posts = posts;
                 this.postsLoading = false;
             });
-        this._usersService.getUsers()
-            .subscribe(users =>
-                this.users = users);
     }
 
     selectPost(post) {
@@ -51,20 +60,8 @@ export class PostsComponent implements OnInit {
             });
     }
 
-    updatePostsByUser(userId) {
-        this.postsLoading = true;
-        if (userId == "all") {
-            this._postsService.getPosts()
-                .subscribe(posts => {
-                    this.posts = posts;
-                    this.postsLoading = false;
-                });
-        } else {
-            this._postsService.getPostsByUser(userId)
-                .subscribe(posts => {
-                    this.posts = posts;
-                    this.postsLoading = false;
-                })
-        }
+    updatePostsByUser(filter) {
+        this.posts = null;
+        this.loadPosts(filter);
     }
 }
