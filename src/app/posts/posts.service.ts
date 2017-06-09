@@ -22,11 +22,6 @@ export class PostsService {
             .map(res => res.json());
     }
 
-    getPostsByUser(userId) {
-        return this._http.get(this.postsUrl + '?userId=' + userId)
-            .map(res => res.json());
-    }
-
     getPostComments(postId) : Observable<PostComment[]>{
         return this._http.get(this.postsUrl + "/" + postId + "/comments")
             .map(res => res.json());
