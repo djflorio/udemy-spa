@@ -5,6 +5,8 @@ import { UsersService } from '../users.service';
 import { Post } from './post';
 import { PostComment } from './post-comment';
 
+import * as _ from 'underscore';
+
 @Component({
     templateUrl: './posts.component.html',
     styles: [`
@@ -25,6 +27,8 @@ export class PostsComponent implements OnInit {
     selectedPost = new Post();
     selectedPostComments: PostComment[];
     users = [];
+    pagedPosts = [];
+    pageSize = 5;
 
     constructor(private _postsService: PostsService, private _usersService: UsersService) {}
 
@@ -44,8 +48,10 @@ export class PostsComponent implements OnInit {
         this._postsService.getPosts(filter)
             .subscribe(posts => {
                 this.posts = posts;
-                this.postsLoading = false;
-            });
+                this.pagedPosts = _.take(this.posts, this.pageSize);
+            },
+            null,
+            () => { this.postsLoading = false; });
     }
 
     selectPost(post) {
@@ -63,5 +69,10 @@ export class PostsComponent implements OnInit {
     updatePostsByUser(filter) {
         this.posts = null;
         this.loadPosts(filter);
+    }
+
+    onPageChange(e) {
+        var startIndex = (e.newPage - 1) * this.pageSize;
+        this.pagedPosts = _.take(_.rest(this.posts, startIndex), this.pageSize);
     }
 }

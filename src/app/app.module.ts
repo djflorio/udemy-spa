@@ -11,6 +11,7 @@ import { UsersComponent } from './users.component';
 import { AddUserComponent } from './add-user.component';
 import { PostsComponent } from './posts/posts.component';
 import { SpinnerComponent } from './spinner.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 import { UsersService } from './users.service';
 import { PostsService } from './posts/posts.service';
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     UsersComponent,
     AddUserComponent,
     PostsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
